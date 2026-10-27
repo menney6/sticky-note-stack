@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sticky Notes with LIFO Undo Stack</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header & Concept Overview -->
+  <header class="app-header">
+    <div class="header-container">
+      <h1>📝 Sticky Notes & LIFO Undo Visualizer</h1>
+      <p class="subtitle">
+        A real-world demonstration of the <strong>Stack Data Structure (Last-In, First-Out)</strong> in text editing.
+      </p>
+    </div>
+  </header>
+
+  <!-- Main Application Layout -->
+  <main class="main-container">
+    <!-- Left Column: The Sticky Note User Interface -->
+    <section class="card note-section">
+      <div class="section-title">
+        <h2>1. The Real-World Application</h2>
+        <span class="badge">Text Editor</span>
+      </div>
+      <p class="section-desc">
+        Type notes below. Each time you type a new line or sentence, a snapshot is <strong>pushed</strong> onto the Undo Stack.
+      </p>
+
+      <!-- The Visual Sticky Note -->
+      <div class="sticky-note-wrapper">
+        <div class="sticky-pin">📌</div>
+        <div class="sticky-note">
+          <textarea id="noteInput" placeholder="Start typing your note here... (e.g., groceries, thoughts, to-do list)"></textarea>
+          <div class="note-footer">
+            <span id="charCount">0 characters</span>
+            <span id="typingIndicator">Ready</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="button-group">
+        <button id="saveBtn" class="btn btn-primary" title="Push current note to Stack">
+          💾 Push Current Note (Save)
+        </button>
+        <button id="undoBtn" class="btn btn-danger" title="Pop latest state from Stack (Ctrl + Z)">
+          ↩️ Undo (Pop from Stack)
+        </button>
+        <button id="clearBtn" class="btn btn-secondary" title="Clear note text">
+          🗑️ Clear Note
+        </button>
+      </div>
+
+      <!-- Quick Demo Presets -->
+      <div class="demo-box">
+        <span class="demo-label">⚡ Quick Demos for Class:</span>
+        <button id="demoGroceryBtn" class="btn btn-sm">🛒 Demo Grocery List</button>
+        <button id="demoMeetingBtn" class="btn btn-sm">📅 Demo Meeting Notes</button>
+      </div>
+    </section>
+
+    <!-- Right Column: The Visual Stack -->
+    <section class="card visualizer-section">
+      <div class="section-title">
+        <h2>2. Inside the Memory: The Stack</h2>
+        <span class="badge badge-accent" id="stackCountBadge">Size: 0</span>
+      </div>
+      <p class="section-desc">
+        Notice how items stack up. When you click <strong>Undo</strong>, only the <strong>TOP</strong> item (the last edit) gets popped!
+      </p>
+
+      <!-- Visual Stack Container (Cylinder/Tube) -->
+      <div class="stack-box-outer">
+        <div class="stack-box-header">
+          <span>⬆️ TOP (Last In / First Out)</span>
+        </div>
+        
+        <div class="stack-container" id="stackContainer">
+          <!-- Stack items will be dynamically injected here by app.js -->
+          <div class="stack-empty" id="emptyMessage">
+            The stack is empty.<br>Start typing on the left to push history states!
+          </div>
+        </div>
+
+        <div class="stack-box-footer">
+          <span>⬇️ BOTTOM (First In)</span>
+        </div>
+      </div>
+
+      <!-- Operation History Log -->
+      <div class="log-container">
+        <h3>📋 Live Stack Operations Log:</h3>
+        <ul id="operationsLog" class="log-list">
+          <li class="log-entry log-init">System initialized. Stack is empty.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- Educational Explainer Footer -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <h3>💡 How Does This Satisfy the Assignment?</h3>
+      <div class="explainer-grid">
+        <div class="explainer-card">
+          <h4>1. What is the Real-World Application?</h4>
+          <p>
+            The <strong>Undo mechanism</strong> used in apps like Google Docs, Apple Notes, and Microsoft Word.
+          </p>
+        </div>
+        <div class="explainer-card">
+          <h4>2. Why is a Stack Necessary?</h4>
+          <p>
+            You cannot undo an action from 10 minutes ago before undoing the one made 5 seconds ago. Rollbacks <strong>must</strong> happen in exact reverse chronological order.
+          </p>
+        </div>
+        <div class="explainer-card">
+          <h4>3. How is LIFO Proven Here?</h4>
+          <p>
+            The <strong>Last</strong> edit saved is placed at the <strong>Top</strong> of the stack. When you hit <strong>Undo</strong>, that top edit is the <strong>First</strong> one removed (popped).
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
